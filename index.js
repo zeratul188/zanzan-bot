@@ -1,8 +1,29 @@
-const Discord = require("discord.js");
-const { token } = require("./config.json");
+const { Client, Intents } = require("discord.js");
+//const { token } = require("./config.json");
 
-const client = new Discord.Client();
+const prefix = '#';
 
+const client = new Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+        Intents.FLAGS.GUILD_MEMBERS,
+        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS
+    ],
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+});
 
+client.on('ready', () => {
+    console.log('Zanzan Bot is ready.');
+});
 
-client.login(token);
+client.on('message', async message => {
+
+});
+
+//개발용
+//client.login(token);
+
+//Heroku 전용
+client.login(process.env.TOKEN);
